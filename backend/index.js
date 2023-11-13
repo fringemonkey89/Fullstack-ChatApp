@@ -13,11 +13,15 @@ app.post("/authenticate", async (req, res) => {
         { username: username, secret: username, first_name: username },
         { headers: { "Private-Key": "bc1187b0-2665-4528-b447-ecccda5be371" } }
     )
-    return res.json({ username: username, secret: "sha256..." });
+    return res.status(r.status).json( r.data );
   } catch(e) {
     return res.status(e.response.status).json(e.response.data)
   }
   
 });
 
-app.listen(3001);
+
+
+app.listen(3001, () => {
+    console.log('server is running on port 3001')
+});
