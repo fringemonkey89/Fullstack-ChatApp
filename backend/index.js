@@ -1,3 +1,4 @@
+const axios = require('axios');
 const express = require("express");
 const cors = require("cors");
 
@@ -15,7 +16,9 @@ app.post("/authenticate", async (req, res) => {
     )
     return res.status(r.status).json( r.data );
   } catch(e) {
-    return res.status(e.response.status).json(e.response.data)
+    const status = e.response?.status ?? 500;
+    const data = e.response?.data ?? "Internal Server Error";
+    return res.status(status).json(data)
   }
   
 });
